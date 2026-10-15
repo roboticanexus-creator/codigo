@@ -1,0 +1,127 @@
+<html lang="pt-br">
+<body>
+    <h1> Bem vindo ao site do emilio </h1>
+    <button id = btnmadeira> Arvore (Vida:100)</button>
+    <button id = btnpedra> Pedra (Vida:250) /Requer Picareta/</button>
+    
+
+    <button onclick="document.getElementById('bancada').style.display = (document.getElementById('bancada').style.display === 'none') ? 'inline-block' : 'none'">
+        Bancada de Ferramentas
+    </button>
+
+<div id = "bancada"style="display: none;">
+    <button id = btnpcm>Picareta de madeira (3-Madeiras)</button>
+    <button id = btnmcm>Machado de madeira (3-Madeiras)</button>
+    <button id = btnpcp>Picareta de Pedra (2-pedras 1-Madeira)</button>
+    <button id = btnmcp>Machado de pedra (2-Pedras 1-Madeira)</button>
+</div>
+</body>
+<script>
+    const btnarvore = document.getElementById("btnmadeira")
+    const btnpedra = document.getElementById("btnpedra")
+    const btnpicaretamadeira = document.getElementById("btnpcm")
+    const btnmachadomadeira = document.getElementById("btnmcm")
+    const btnpicaretapedra = document.getElementById("btnpcp")
+    const btnmachadopedra = document.getElementById("btnmcp")
+    vidaarvore = 100
+    madeiras = 0
+    pedras = 0
+    vidapedra = 250
+    picaretapedra = false
+    machadopedra = false
+    picaretamadeira = false
+    machadomadeira = false
+    btnarvore.addEventListener("click",function() {
+        if (machadomadeira == true) {
+        alert("Você bateu na arvore!")
+        vidaarvore -= 25
+        btnarvore.innerText = `Arvore (Vida:${vidaarvore})`
+        }
+        else if (machadopedra == true) {
+        alert("Você bateu na arvore!")
+        vidaarvore -= 50
+        btnarvore.innerText = `Arvore (Vida:${vidaarvore})`
+        }
+        else{
+        alert("Você bateu na arvore!")
+        vidaarvore -= 10
+        btnarvore.innerText = `Arvore (Vida:${vidaarvore})`
+        }
+        if (vidaarvore <= 0){
+        alert("você quebrou a arvore!")
+        madeiras += 1
+        alert(`você tem ${madeiras} madeiras`)
+        vidaarvore = 100
+        btnarvore.innerText = `Arvore (Vida:${vidaarvore})`
+    }
+    })
+    btnmachadomadeira.addEventListener("click",function(){
+        if (madeiras >= 3){
+            machadomadeira = true
+            madeiras -= 3
+            machadopedra = false
+            alert(`Você fez um machado de madeira! Você tem ${madeiras} madeiras agora!`)
+        }
+})
+    btnpicaretamadeira.addEventListener("click",function(){
+        if (madeiras >= 3){
+            picaretamadeira = true
+            madeiras -= 3
+            picaretapedra = false
+            alert(`Você fez uma Picareta de madeira! Você tem ${madeiras} madeiras agora!`)
+        }
+        
+})
+    btnmachadopedra.addEventListener("click",function(){
+        if (pedras >= 2 && madeiras >= 1){
+            machadopedra = true
+            machadomadeira = false
+            alert(`Você fez um machado de Pedra! Você tem ${madeiras} madeiras e ${pedras} pedras agora!`)
+        }
+})
+    btnpicaretapedra.addEventListener("click",function(){
+        if (pedras >= 2 && madeiras >= 1){
+            picaretapedra = true
+            picaretamadeira = false
+            alert(`Você fez uma picareta de Pedra! Você tem ${madeiras} madeiras e ${pedras} pedras agora!`)
+        }
+})
+    btnpedra.addEventListener("click",function(){
+        if (picaretamadeira == true){
+            vidapedra -= 25
+            alert("você bateu na pedra")
+            btnpedra.innerText = `Pedra (Vida:${vidapedra}) /Requer Picareta/`
+        }
+        if (picaretapedra == true){
+            vidapedra -= 50
+            alert("você bateu na pedra")
+            btnpedra.innerText = `Pedra (Vida:${vidapedra}) /Requer Picareta/`
+        }
+        else{
+            alert("Você não tem picareta!")
+        }
+        if(vidapedra <= 0){
+            alert(`Você quebrou a pedra! Agora você tem ${pedras} pedras`)
+            vidapedra = 250
+            btnpedra.innerText = `Pedra (Vida:${vidapedra}) /Requer Picareta/`
+        }
+})
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
